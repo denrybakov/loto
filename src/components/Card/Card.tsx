@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-
 interface ICardProps {
   children: ReactNode
 }

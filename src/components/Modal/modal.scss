@@ -1,0 +1,35 @@
+.modal {
+  position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, .6);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  &__block {
+    text-align: center;
+    width: 50%;
+    background-color: $white;
+    padding: 30px 50px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+  }
+  &__block.win {
+    height: 300px;
+    padding: 30px;
+    background: url('https://www.seekpng.com/png/full/696-6965444_winner-png.png') no-repeat center / cover;
+    background-size: 150px 100px;
+    background-position-x: 90%;
+    background-position-y: 10%;
+    background-color: $primary;
+  }
+}

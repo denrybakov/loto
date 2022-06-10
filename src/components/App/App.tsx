@@ -1,20 +1,54 @@
 
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getRandomField_1 } from '../../redux/actions/randomField_1';
+import { getRandomField_2 } from '../../redux/actions/randomField_2';
+import { postResults } from '../../redux/actions/results';
 import { addNum, removeNum } from '../../redux/actions/selectedField';
 import { addNum_2, removeNum_2 } from '../../redux/actions/selectedField_2';
+import { findCorrectNum } from '../../utils/findCorrectNum';
 import { ButtonNum } from '../ButtonNum';
 import { Card } from '../Card';
 import { EIcon, Icon } from '../Icon';
+import { Modal } from '../Modal';
 import { EColor, Text } from '../Text'
 
 function App() {
+  const storeField_1 = useSelector((state: any) => state.randomField_1)
+  const storeField_2 = useSelector((state: any) => state.randomField_2)
+  const storeSelectedField_1 = useSelector((state: any) => state.selectedField)
+  const storeSelectedField_2 = useSelector((state: any) => state.selectedSecondField)
+  const dispatch = useDispatch()
+
   const [counter, setCounter] = useState<number>(8)
   const [counter_2, seCounter_2] = useState<number>(1)
+
   const [arrUserNum, setUserNum] = useState<number[]>([])
+  const [rndField_1, setRndField_1] = useState([])
+
   const [arrBtn] = useState(Array(19).fill(''))
   const [arrBtn_2] = useState(Array(2).fill(''))
-  const dispatch = useDispatch()
+
+  const [isWin, setIsWin] = useState<boolean>(false)
+  const [isModal, setIsModal] = useState<boolean>(false)
+
+  useEffect(() => {
+    dispatch(getRandomField_1())
+    dispatch(getRandomField_2())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    const concatArr = storeField_1.concat(storeField_2)
+    setRndField_1(concatArr)
+  }, [storeField_1, storeField_2])
+
+  useEffect(() => {
+    const concatArr = storeSelectedField_1.concat(storeSelectedField_2)
+    setUserNum(concatArr)
+  }, [storeSelectedField_1, storeSelectedField_2])
+
 
   const clickHandlerBtn = (e: any, isActive: boolean) => {
     if (isActive) {
@@ -37,7 +71,16 @@ function App() {
   }
 
   const onResults = () => {
-    console.log('arr User', arrUserNum)
+    findCorrectNum(rndField_1, arrUserNum).length >= 4 ? setIsWin(true) : setIsWin(false)
+    setIsModal(true)
+
+    dispatch(postResults({
+      selectedNumber: {
+        firstField: rndField_1,
+        secondField: arrUserNum
+      },
+      isTicketWon: isWin
+    }))
   }
 
   return (
@@ -48,14 +91,15 @@ function App() {
             As={'h1'}
             size={20}
             color={EColor.black}
+            children={'Билет 1'}
             bold
-          >
-            Билет 1
-          </Text>
+          />
           <Icon type={EIcon.magic} width={30} height={30} />
         </div>
-        <Text As={'span'} children={'Поле 1'} size={18} bold />
-        <Text As={'span'} children={`Отметьте ${counter} чисел.`} size={18} />
+        <div className='App__title'>
+          <Text As={'span'} children={'Поле 1 '} size={18} bold />
+          <Text As={'span'} children={`Отметьте ${counter} чисел.`} size={18} />
+        </div>
         <div className='App__grid-btns'>
           <div className='App__grid-line'>
             {
@@ -71,8 +115,10 @@ function App() {
               ))
             }
           </div>
-          <Text As={'span'} children={'Поле 2'} size={18} bold />
-          <Text As={'span'} children={`Отметьте ${counter_2} число.`} size={18} />
+          <div className='App__title'>
+            <Text As={'span'} children={'Поле 2 '} size={18} bold />
+            <Text As={'span'} children={`Отметьте ${counter_2} число.`} size={18} />
+          </div>
           <div className="App__grid-line">
             {
               arrBtn_2.map((_, i) => (
@@ -88,13 +134,25 @@ function App() {
             }
           </div>
         </div>
-        <button
-          className={'btn-primary'}
-          onClick={onResults}
-        >
-          Показать результаты
-        </button>
+        <div className='App__footer'>
+          <button
+            className={'btn-primary'}
+            onClick={onResults}
+          >
+            Показать результаты
+          </button>
+        </div>
       </Card>
+      {
+        isModal && (
+          <Modal
+            title={'Результаты:'}
+            children={`${isWin ? 'Ого, Вы выйграли! Поздравляем' : 'Проиграли :('}`}
+            isWin={isWin}
+            onClose={() => setIsModal(false)}
+          />
+        )
+      }
 
     </div>
   );

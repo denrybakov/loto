@@ -20,14 +20,6 @@ export const actionRemoveNum_2: ActionCreator<AnyAction | ISelectedField_2> = (v
 })
 
 export const addNum_2: any = (num: any) => (dispatch: Dispatch<ISelectedField_2 | any>) => {
-  // axios.post('/companies/12/image', data, {
-  //   headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` },
-  // })
-  // .then(res => {
-  //   console.log('axios data', res.data)
-  //   dispatch(actionUpdateImg(res.data))
-  // })
-  // .catch(console.log)
   dispatch(actionAddNum_2(num))
 }
 

@@ -4,10 +4,31 @@
   justify-content: center;
   width: 100%;
   padding-top: 10px;
+
   &__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+  &__title {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  &__grid-line {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    &.spanBtn {
+      flex-shrink: 1;
+    }
+  }
+  
+  &__footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
   }
 }
 

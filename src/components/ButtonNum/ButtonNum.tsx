@@ -1,9 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addNum, removeNum } from '../../redux/actions/selectedField';
-
-
-
+import React, { useState } from 'react';
 interface IButtonNumProps {
   text: string
   name: string
@@ -15,13 +10,13 @@ interface IButtonNumProps {
 const VOID_FUNC = () => { }
 
 export function ButtonNum({ text, name, active, disabled, onClick = VOID_FUNC }: IButtonNumProps) {
-  const [isActive, setActive] = useState<boolean>(false)
-  const dispatch = useDispatch()
+  const [isActive, setActive] = useState<boolean>(active)
 
   const toggleActive = (e: any) => {
     setActive(!isActive)
     onClick(e, isActive)
   }
+
   return (
     <span className={'spanBtn'}>
       <button

@@ -1,0 +1,24 @@
+@media all and (max-width: 991px) {
+  .App {
+    &__title {
+      text-align: left;
+    }
+    &__grid-line {
+      justify-content: flex-start;
+    }
+  }
+
+  .modal {
+    &__block {
+      width: 80%;
+    }
+  }
+}
+
+@media all and (max-width: 650px) {
+  .App {
+    &__grid-line {
+      width: 300px;
+    }
+  }
+}
