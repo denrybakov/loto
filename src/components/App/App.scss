@@ -1,0 +1,32 @@
+.App {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: 10px;
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.btn-primary {
+  padding: 15px 25px;
+  border: $border;
+  background-color: transparent;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  &:hover {
+    background-color: $gray;
+    border: 1px solid $gray;
+    transition: background-color $transition;
+    -webkit-transition: background-color $transition;
+    -moz-transition: background-color $transition;
+    -ms-transition: background-color $transition;
+    -o-transition: background-color $transition;
+}
+}

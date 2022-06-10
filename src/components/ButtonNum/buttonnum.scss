@@ -1,0 +1,44 @@
+.spanBtn {
+  display: inline-block;
+  position: relative;
+  width: 40px;
+  height: 40px;
+
+  & .btn:hover {
+    transition: background-color $transition;
+    -webkit-transition: background-color $transition;
+    -moz-transition: background-color $transition;
+    -ms-transition: background-color $transition;
+    -o-transition: background-color $transition;
+    background-color: $gray;
+    border: none;
+  }
+}
+.btn {
+  border: $border;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+
+  &.active {
+    border: none;
+    background-color: $primary;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+
+}
+}

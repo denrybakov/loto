@@ -1,0 +1,33 @@
+.text {
+  font-weight: normal;
+  &.uppercase {
+    text-transform: uppercase;
+  }
+  &.bold {
+    font-weight: bold;
+  }
+  &.black {
+    color: rgba(35, 35, 35, 0.8)
+  }
+  &.gray {
+    color: #DDDDDD;
+  }
+  &.s_12 {
+    font-size: 12px;
+  }
+  &.s_14 {
+    font-size: 14px;
+  }
+  &.s_16 {
+    font-size: 16px;
+  }
+  &.s_18 {
+    font-size: 18px;
+  }
+  &.s_20 {
+    font-size: 20px;
+  }
+  &.s_22 {
+    font-size: 22px;
+  }
+}
